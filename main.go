@@ -5,6 +5,10 @@ import (
     "github.com/c-bata/go-prompt"
 )
 
+func executer(in string) {
+    fmt.Println("Your input: " + in)
+}
+
 func completer(d prompt.Document) []prompt.Suggest {
     s := []prompt.Suggest{
 		{Text: "users", Description: "Store the username and age"},
@@ -15,7 +19,11 @@ func completer(d prompt.Document) []prompt.Suggest {
 }
 
 func main() {
-    fmt.Println("How are you?")
-    prompt.Input(">> ", completer)
-    fmt.Println("Bye!")
+    p := prompt.New (
+        executer,
+        completer,
+        prompt.OptionPrefix(">>> "),
+        prompt.OptionTitle("sql-prompt"),
+    )
+    p.Run()
 }
