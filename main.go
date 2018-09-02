@@ -4,7 +4,17 @@ import (
     "fmt"
     "os"
     "strings"
+
     "github.com/c-bata/go-prompt"
+
+    _ "github.com/google/go-cloud/gcp"
+    _ "github.com/google/go-cloud/blob"
+    _ "github.com/google/go-cloud/blob/gcsblob"
+
+    _ "github.com/aws/aws-sdk-go/aws"
+    _ "github.com/aws/aws-sdk-go/aws/credentials"
+    _ "github.com/aws/aws-sdk-go/aws/session"
+    _ "github.com/google/go-cloud/blob/s3blob"
 )
 
 func executer(in string) {
@@ -23,7 +33,7 @@ func executer(in string) {
 }
 
 func completer(d prompt.Document) []prompt.Suggest {
-    s := []prompt.Suggest{
+    s := []prompt.Suggest {
 	}
 	return prompt.FilterHasPrefix(s, d.GetWordBeforeCursor(), true)
 }
