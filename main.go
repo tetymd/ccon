@@ -8,12 +8,10 @@ import (
 )
 
 func executer(in string) {
-    fmt.Println("Your input: " + in)
-
     if in == "exit" {
         os.Exit(0)
     } else if in == "help" {
-        fmt.Println("command format: cloud service [action]")
+        fmt.Println("command format:\n    cloud [service] [action]\n")
     }
 
     switch parse(in)[0] {
@@ -40,7 +38,7 @@ func main() {
         executer,
         completer,
         prompt.OptionPrefix(">>> "),
-        prompt.OptionTitle("sql-prompt"),
+        prompt.OptionTitle("cloud console"),
     )
     p.Run()
 }
