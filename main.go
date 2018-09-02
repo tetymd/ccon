@@ -2,11 +2,17 @@ package main
 
 import (
     "fmt"
+    "os"
     "github.com/c-bata/go-prompt"
 )
 
 func executer(in string) {
-    fmt.Println("Your input: " + in)
+    if in == "exit" {
+        os.Exit(0)
+    } else {
+        fmt.Println("Your input: " + in)
+
+    }
 }
 
 func completer(d prompt.Document) []prompt.Suggest {
