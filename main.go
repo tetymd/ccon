@@ -7,9 +7,9 @@ import (
 
     "github.com/c-bata/go-prompt"
 
-    _ "github.com/google/go-cloud/gcp"
-    _ "github.com/google/go-cloud/blob"
-    _ "github.com/google/go-cloud/blob/gcsblob"
+    "github.com/google/go-cloud/gcp"
+    "github.com/google/go-cloud/blob"
+    "github.com/google/go-cloud/blob/gcsblob"
 
     _ "github.com/aws/aws-sdk-go/aws"
     _ "github.com/aws/aws-sdk-go/aws/credentials"
@@ -27,6 +27,7 @@ func executer(in string) {
     switch parse(in)[0] {
     case "gcp":
         fmt.Println("Google Cloud Platform")
+        setupGCP()
     case "aws":
         fmt.Println("Amazon Web Service")
     }
@@ -52,3 +53,22 @@ func main() {
     )
     p.Run()
 }
+
+// func setupGCP(ctx context.Context, bucket string) (*blob.Bucket, error) {
+func setupGCP(ctx context.Context, bucket string) string {
+    // DefaultCredentials assumes a user has logged in with gcloud.
+    // See here for more information:
+    // https://cloud.google.com/docs/authentication/getting-started
+    creds, err := gcp.DefaultCredentials(ctx)
+    if err != nil {
+        return nil, err
+    }
+    c, err := gcp.NewHTTPClient(gcp.DefaultTransport(), gcp.CredentialsTokenSource(creds))
+    if err != nil {
+        return nil, err
+    }
+    // The bucket name must be globally unique.
+    // return gcsblob.OpenBucket(ctx, bucket, c)
+    return "Success!"
+}
+
